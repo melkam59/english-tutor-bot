@@ -1,0 +1,20 @@
+commands:
+  en:
+    - command: start
+      description: Main menu
+    - command: practice
+      description: Practice English with the AI tutor
+    - command: lesson
+      description: Get a personalized lesson
+    - command: vocabulary
+      description: My words and revision
+    - command: progress
+      description: Learning statistics
+    - command: profile
+      description: My learning profile
+    - command: settings
+      description: Change language, level, goal
+    - command: subscription
+      description: Free and Premium plans
+    - command: help
+      description: How the bot works

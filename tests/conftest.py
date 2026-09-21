@@ -1,0 +1,43 @@
+import os
+from typing import Final
+
+# Settings are read from the environment when the DI container is built,
+# so safe fake values must be set before any `app` import.
+_TEST_ENV: Final[dict[str, str]] = {
+    "TELEGRAM_LOCALES": "en",
+    "TELEGRAM_BOT_TOKEN": "42:TEST",
+    "TELEGRAM_DROP_PENDING_UPDATES": "False",
+    "TELEGRAM_USE_WEBHOOK": "False",
+    "TELEGRAM_RESET_WEBHOOK": "False",
+    "TELEGRAM_WEBHOOK_PATH": "/telegram",
+    "TELEGRAM_WEBHOOK_SECRET": "test-secret",
+    "POSTGRES_HOST": "localhost",
+    "POSTGRES_PASSWORD": "test",
+    "POSTGRES_DB": "test",
+    "POSTGRES_PORT": "5432",
+    "POSTGRES_USER": "test",
+    "POSTGRES_DATA": "/tmp",
+    "ALCHEMY_ECHO": "False",
+    "ALCHEMY_ECHO_POOL": "False",
+    "ALCHEMY_POOL_SIZE": "5",
+    "ALCHEMY_MAX_OVERFLOW": "5",
+    "ALCHEMY_POOL_TIMEOUT": "10",
+    "ALCHEMY_POOL_RECYCLE": "3600",
+    "REDIS_HOST": "localhost",
+    "REDIS_PORT": "6379",
+    "REDIS_DB": "0",
+    "REDIS_PASSWORD": "test",
+    "REDIS_DATA": "/tmp",
+    "SERVER_HOST": "127.0.0.1",
+    "SERVER_PORT": "8080",
+    "SERVER_URL": "https://example.com",
+    "COMMON_ADMIN_CHAT_ID": "1",
+    "LLM_PROVIDER": "openai",
+    "LLM_API_KEY": "test",
+    "LLM_MODEL": "test-model",
+    "LLM_SUMMARY_MODEL": "test-model-mini",
+    "SPEECH_PROVIDER": "openai",
+    "SPEECH_API_KEY": "test",
+    "SPEECH_STT_MODEL": "test-stt",
+}
+os.environ.update(_TEST_ENV)

@@ -1,0 +1,13 @@
+# Level assessment question bank, see app/application/services/assessment_bank.py
+# TODO(M3): 3-4 questions per CEFR level (grammar + vocabulary) and one written task.
+assessment:
+  - id: 1
+    level: A1
+    text: "She ___ a teacher."
+    options: ["am", "is", "are", "be"]
+    correct_option: 1
+  - id: 2
+    level: A2
+    text: "Yesterday I ___ to the cinema with my friend."
+    options: ["go", "goes", "went", "gone"]
+    correct_option: 2

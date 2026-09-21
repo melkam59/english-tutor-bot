@@ -1,0 +1,19 @@
+from typing import Protocol
+
+
+class UsageCounter(Protocol):
+    """Daily per-user counters backed by Redis, reset at midnight UTC."""
+
+    async def get_messages(self, user_id: int) -> int: ...
+
+    async def increment_messages(self, user_id: int) -> int: ...
+
+    async def get_voice_messages(self, user_id: int) -> int: ...
+
+    async def increment_voice_messages(self, user_id: int) -> int: ...
+
+
+class Throttler(Protocol):
+    async def is_throttled(self, user_id: int, rate: float) -> bool: ...
+
+    async def is_duplicate_update(self, bot_id: int, update_id: int, ttl: int) -> bool: ...
