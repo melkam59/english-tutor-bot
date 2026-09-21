@@ -6,6 +6,7 @@ from app.application.interactors.progress.summary import ProgressInteractor
 from app.application.interactors.tutor.conversation import TutorConversationInteractor
 from app.application.interactors.voice.transcription import VoiceInteractor
 from app.domain.enums.practice_mode import PracticeMode, RolePlayScenario
+from app.domain.enums.request_type import RequestType
 from app.presentation.telegram.flows.base import BaseFlow
 from app.presentation.telegram.presenters.common.practice import PracticePresenter
 from app.presentation.telegram.view.renderer import Renderer
@@ -36,9 +37,12 @@ class PracticeFlow(BaseFlow):
         return await self.renderer.apply(self.presenter.not_implemented())
 
     async def reply_text(self, text: str) -> Any:
-        # TODO(M2): limits.check_text_message -> "typing" action -> tutor.reply
-        #  -> limits.record_llm_usage -> progress.track_activity -> presenter.tutor_reply
-        return await self.renderer.apply(self.presenter.not_implemented())
+        await self.limits.check_text_message(text)
+        await self.renderer.typing()
+        reply = await self.tutor.reply(text)
+        await self.limits.record_llm_usage(RequestType.CHAT, reply.usage)
+        await self.progress.track_activity()
+        return await self.renderer.apply(self.presenter.tutor_reply(reply))
 
     async def reply_voice(self, file_id: str, duration: int) -> Any:
         # TODO(M4): limits.check_voice_message -> voice.transcribe -> limits.record_stt_usage

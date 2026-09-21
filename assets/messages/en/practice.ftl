@@ -9,3 +9,6 @@ buttons-practice-grammar = 📐 Grammar
 buttons-practice-vocabulary = 📚 Vocabulary
 buttons-practice-role_play = 🎭 Role-play
 buttons-practice-stop = ⏹ Finish practice
+
+messages-practice-explanation = 📝 <b>Explanation</b>
+messages-practice-better_phrases = 💡 <b>More natural</b>

@@ -14,5 +14,5 @@ class ProgressFlow(BaseFlow):
     renderer: Renderer
 
     async def show_summary(self) -> Any:
-        # TODO(M3): interactor.get_summary -> presenter.summary
-        return await self.renderer.apply(self.presenter.not_implemented())
+        summary = await self.interactor.get_summary()
+        return await self.renderer.apply(self.presenter.summary(summary))

@@ -8,6 +8,9 @@ from app.infrastructure.postgres.uow import UoW
 
 @dataclass
 class VocabularyRepository(VocabularyGateway):
-    # TODO(M3): implement every method of VocabularyGateway
+    # TODO(M3): implement the remaining methods of VocabularyGateway
     _uow: UoW
     _helper: SqlRepositoryHelper[VocabularyItem]
+
+    async def count(self, user_id: int) -> int:
+        return await self._helper.count(VocabularyItem.user_id == user_id)

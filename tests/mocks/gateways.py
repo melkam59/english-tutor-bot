@@ -5,10 +5,12 @@ from typing import Optional
 from app.application.models.dto.llm import Correction
 from app.application.ports.limits.rate_limiter import UsageCounter
 from app.application.ports.repositories.conversations import ConversationsGateway
+from app.application.ports.repositories.lessons import LessonsGateway
 from app.application.ports.repositories.messages import MessagesGateway
 from app.application.ports.repositories.mistakes import MistakesGateway
 from app.application.ports.repositories.usage import UsageGateway
 from app.application.ports.repositories.users import UsersGateway
+from app.application.ports.repositories.vocabulary import VocabularyGateway
 from app.domain.conversation import Conversation
 from app.domain.enums.message_role import MessageRole
 from app.domain.enums.mistake_category import MistakeCategory
@@ -175,3 +177,19 @@ class FakeUsageGateway(UsageGateway):
         )
         self.items.append(item)
         return item
+
+
+@dataclass
+class FakeLessonsGateway(LessonsGateway):
+    completed: int = 0
+
+    async def count_completed(self, user_id: int) -> int:
+        return self.completed
+
+
+@dataclass
+class FakeVocabularyGateway(VocabularyGateway):
+    total: int = 0
+
+    async def count(self, user_id: int) -> int:
+        return self.total
