@@ -8,6 +8,8 @@ from .gemini import GeminiGateway
 from .openai import OpenAIGateway
 
 _PROVIDERS: Final[dict[LLMProviderType, type[LLMGateway]]] = {
+    # DeepSeek speaks the OpenAI protocol
+    LLMProviderType.DEEPSEEK: OpenAIGateway,
     LLMProviderType.OPENAI: OpenAIGateway,
     LLMProviderType.ANTHROPIC: AnthropicGateway,
     LLMProviderType.GEMINI: GeminiGateway,

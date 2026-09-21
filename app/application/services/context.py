@@ -23,8 +23,11 @@ class ConversationContextService:
     messages_gateway: MessagesGateway
 
     async def build_context(self, conversation: Conversation) -> list[LLMMessage]:
-        # TODO(M2): messages_gateway.get_recent(limit=config.llm.context_messages)
-        raise NotImplementedError
+        messages = await self.messages_gateway.get_recent(
+            conversation_id=conversation.id,
+            limit=self.config.llm.context_messages,
+        )
+        return [LLMMessage(role=message.role, text=message.text) for message in messages]
 
     async def summarize_if_needed(self, conversation: Conversation) -> None:
         # TODO(M2): once count > config.llm.summarize_after_messages fold the older

@@ -1,4 +1,5 @@
 from enum import StrEnum, auto
+from typing import Optional
 
 from pydantic import SecretStr
 
@@ -7,6 +8,7 @@ from .base import EnvSettings
 
 # noinspection PyEnum
 class LLMProviderType(StrEnum):
+    DEEPSEEK = auto()
     OPENAI = auto()
     ANTHROPIC = auto()
     GEMINI = auto()
@@ -15,6 +17,8 @@ class LLMProviderType(StrEnum):
 class LLMConfig(EnvSettings, env_prefix="LLM_"):
     provider: LLMProviderType
     api_key: SecretStr
+    # Override for OpenAI-compatible APIs, DeepSeek gets its default automatically
+    base_url: Optional[str] = None
     model: str
     # Cheaper model used for conversation summarization
     summary_model: str
