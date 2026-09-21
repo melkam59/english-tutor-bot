@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from decimal import Decimal
 from typing import Optional
 
 from app.application.models.dto.llm import Correction
@@ -6,13 +7,16 @@ from app.application.ports.limits.rate_limiter import UsageCounter
 from app.application.ports.repositories.conversations import ConversationsGateway
 from app.application.ports.repositories.messages import MessagesGateway
 from app.application.ports.repositories.mistakes import MistakesGateway
+from app.application.ports.repositories.usage import UsageGateway
 from app.application.ports.repositories.users import UsersGateway
 from app.domain.conversation import Conversation
 from app.domain.enums.message_role import MessageRole
 from app.domain.enums.mistake_category import MistakeCategory
 from app.domain.enums.practice_mode import PracticeMode, RolePlayScenario
+from app.domain.enums.request_type import RequestType
 from app.domain.enums.subscription import SubscriptionType
 from app.domain.message import Message
+from app.domain.usage_record import UsageRecord
 from app.domain.user import User
 from app.domain.user_mistake import UserMistake
 
@@ -148,3 +152,26 @@ class FakeUsageCounter(UsageCounter):
     async def increment_voice_messages(self, user_id: int) -> int:
         self.voice[user_id] = self.voice.get(user_id, 0) + 1
         return self.voice[user_id]
+
+
+@dataclass
+class FakeUsageGateway(UsageGateway):
+    items: list[UsageRecord] = field(default_factory=list)
+
+    async def add(
+        self,
+        user_id: int,
+        request_type: RequestType,
+        input_tokens: int,
+        output_tokens: int,
+        estimated_cost: Decimal,
+    ) -> UsageRecord:
+        item = UsageRecord(
+            user_id=user_id,
+            request_type=request_type,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            estimated_cost=estimated_cost,
+        )
+        self.items.append(item)
+        return item
