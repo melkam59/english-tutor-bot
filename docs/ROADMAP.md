@@ -5,24 +5,24 @@ Every stub in the code is tagged `TODO(Mx)`. List them with `grep -rn "TODO(M2" 
 ## M1 — Project setup and basic bot
 Done by the scaffold: structure, Docker, PostgreSQL schema + migration, user registration on
 first update, all commands registered, `/help`, `/profile`, `/settings` screens.
-- [ ] Onboarding chain: `flows/common/onboarding.py`, `interactors/onboarding/profile.py`
+- [x] Onboarding chain: `flows/common/onboarding.py`, `interactors/onboarding/profile.py`
 - [ ] Settings editing: `flows/common/profile.py`
 - [ ] Localized enum titles in `/profile`
 
 ## M2 — LLM tutor
-- [ ] Provider gateway: `infrastructure/llm/<provider>.py`
-- [ ] Prompts: `services/prompts.py`, `assets/prompts/`
-- [ ] Conversation: `interactors/tutor/conversation.py`, `flows/common/practice.py`
-- [ ] Context + summarization: `services/context.py`
-- [ ] Repositories: conversations, messages
-- [ ] Limits: `interactors/limits/usage.py`, `infrastructure/redis/limits.py`, throttling middleware
+- [x] Provider gateway: `infrastructure/llm/<provider>.py`
+- [x] Prompts: `services/prompts.py`, `assets/prompts/`
+- [x] Conversation: `interactors/tutor/conversation.py`, `flows/common/practice.py`
+- [ ] Context (done) + summarization (todo): `services/context.py`
+- [x] Repositories: conversations, messages
+- [ ] Limits (daily quota + cost logging done, throttling todo): `interactors/limits/usage.py`, `infrastructure/redis/limits.py`, throttling middleware
 
 ## M3 — Learning features
 - [ ] Assessment: `assets/assessment.yml`, `services/assessment_bank.py`, `interactors/assessment/`
 - [ ] Lessons: `interactors/lessons/personalized.py`, `flows/common/lesson.py`
-- [ ] Mistakes repository + usage in prompts
+- [x] Mistakes repository + usage in prompts
 - [ ] Vocabulary: `interactors/vocabulary/trainer.py`, `services/spaced_repetition.py`, reminders task
-- [ ] Progress: `interactors/progress/summary.py`
+- [x] Progress: `interactors/progress/summary.py`
 
 ## M4 — Voice and subscriptions
 - [ ] Voice: `interactors/voice/transcription.py`, `infrastructure/speech/`, `infrastructure/telegram/files.py`
