@@ -37,4 +37,7 @@ class OnboardingPresenter(BasePresenter):
             reply_markup=communication_format_keyboard(i18n=self.i18n),
         )
 
+    def completed(self) -> View:
+        return View(text=self.i18n.messages.onboarding.completed())
+
     # TODO(M3): offer_assessment / question / result screens

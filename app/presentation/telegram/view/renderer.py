@@ -11,6 +11,9 @@ from app.presentation.telegram.view.models import RenderMode, View
 class Renderer:
     helper: MessageHelper
 
+    async def typing(self) -> None:
+        await self.helper.send_typing()
+
     async def apply(self, view: View) -> Any:
         if view.mode is RenderMode.NONE or view.text is None:
             return None

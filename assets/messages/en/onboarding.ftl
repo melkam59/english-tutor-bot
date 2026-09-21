@@ -22,3 +22,9 @@ buttons-goal-exam = 🎓 Exam
 buttons-format-text = ⌨️ Text
 buttons-format-voice = 🎙 Voice
 buttons-format-mixed = 🔀 Text and voice
+
+messages-onboarding-completed =
+    ✅ Your profile is ready!
+
+    Now just write me something in English — for example, tell me what you did yesterday.
+    I will correct your mistakes and we will keep talking.

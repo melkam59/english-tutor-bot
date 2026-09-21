@@ -10,6 +10,7 @@ ROOT_DIR: Final[Path] = Path(__file__).parent.parent
 ENV_FILE: Final[Path] = ROOT_DIR / ".env"
 ASSETS_SOURCE_DIR: Final[Path] = ROOT_DIR / "assets"
 MESSAGES_SOURCE_DIR: Final[Path] = ASSETS_SOURCE_DIR / "messages"
+PROMPTS_SOURCE_DIR: Final[Path] = ASSETS_SOURCE_DIR / "prompts"
 
 # Time constants
 TIME_1M: Final[int] = 60

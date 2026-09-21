@@ -5,10 +5,10 @@ conversation with corrections, level assessment, personalized lessons, mistake t
 vocabulary trainer with spaced repetition, progress statistics, Free / Premium plans and
 admin commands.
 
-> **Status: scaffold.** The project structure, database schema, configuration, DI wiring,
-> commands, texts and test skeleton are in place. Business logic is stubbed with
-> `TODO(M1..M5)` markers that map to the milestones in [docs/ROADMAP.md](docs/ROADMAP.md).
-> The bot already starts and answers every command; unfinished screens reply "coming soon".
+> **Status: working demo slice.** Onboarding, AI conversation with corrections explained in
+> the user's native language, conversation memory, mistake tracking, daily limits with token
+> cost logging and `/progress` work end to end (DeepSeek by default). Everything else is
+> stubbed with `TODO(M1..M5)` markers, see [docs/ROADMAP.md](docs/ROADMAP.md).
 
 Built on top of [wakaree/aiogram_bot_template](https://github.com/wakaree/aiogram_bot_template) (MIT).
 
@@ -50,7 +50,7 @@ Find the next thing to implement: `grep -rn "TODO(M1" app`.
 Any non-command text or voice message goes to the AI tutor (`handlers/main/chat.py`).
 
 ## 🧠 LLM configuration
-The provider is selected with `LLM_PROVIDER` (`openai` / `anthropic` / `gemini`) plus
+The provider is selected with `LLM_PROVIDER` (`deepseek` / `openai` / `anthropic` / `gemini`) plus
 `LLM_API_KEY`, `LLM_MODEL` and `LLM_SUMMARY_MODEL`. Business logic only depends on the
 `LLMGateway` port, so a new provider is one class in `app/infrastructure/llm/` registered in
 `factory.py`. Token and cost controls (`LLM_MAX_OUTPUT_TOKENS`, `LLM_CONTEXT_MESSAGES`,

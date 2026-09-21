@@ -80,6 +80,9 @@ class MessageHelperImpl(MessageHelper):
     def get_chat_id(self) -> int:
         return self.resolve_message_id()[0]
 
+    async def send_typing(self) -> None:
+        await self.bot.send_chat_action(chat_id=self.get_chat_id(), action="typing")
+
     def find_message_id(self) -> Optional[int]:
         return self.resolve_message_id()[1]
 

@@ -28,3 +28,4 @@ dist/
 site/
 *.egg-info/
 *.egg
+bot.log
