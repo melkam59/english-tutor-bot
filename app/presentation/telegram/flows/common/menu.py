@@ -17,7 +17,6 @@ class CommonMenuFlow(BaseFlow):
 
     async def start(self) -> Any:
         if not self.user.is_onboarded:
-            # TODO(M1): set OnboardingSG.native_language
             return await self.renderer.apply(
                 self.onboarding_presenter.ask_native_language(user=self.user)
             )

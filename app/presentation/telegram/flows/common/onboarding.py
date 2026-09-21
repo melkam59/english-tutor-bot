@@ -15,7 +15,7 @@ from app.presentation.telegram.view.renderer import Renderer
 class OnboardingFlow(BaseFlow):
     """
     /start -> native language -> English level -> goal -> format -> assessment -> profile.
-    Intermediate answers live in FSM data (``OnboardingState`` / ``AssessmentState``).
+    Every answer is saved to the user right away, assessment answers live in FSM data.
     """
 
     profile: ProfileInteractor
@@ -24,20 +24,22 @@ class OnboardingFlow(BaseFlow):
     renderer: Renderer
 
     async def select_native_language(self, code: str) -> Any:
-        # TODO(M1): store in OnboardingState, render ask_english_level
-        return await self.renderer.apply(self.presenter.not_implemented())
+        await self.profile.set_native_language(code)
+        return await self.renderer.apply(self.presenter.ask_english_level())
 
     async def select_english_level(self, level: EnglishLevel) -> Any:
-        # TODO(M1)
-        return await self.renderer.apply(self.presenter.not_implemented())
+        await self.profile.set_english_level(level)
+        return await self.renderer.apply(self.presenter.ask_learning_goal())
 
     async def select_learning_goal(self, goal: LearningGoal) -> Any:
-        # TODO(M1)
-        return await self.renderer.apply(self.presenter.not_implemented())
+        await self.profile.set_learning_goal(goal)
+        return await self.renderer.apply(self.presenter.ask_communication_format())
 
     async def select_communication_format(self, communication_format: CommunicationFormat) -> Any:
-        # TODO(M1): profile.complete_onboarding, then offer the assessment
-        return await self.renderer.apply(self.presenter.not_implemented())
+        await self.profile.set_communication_format(communication_format)
+        await self.profile.complete_onboarding()
+        # TODO(M3): offer the level assessment before the first conversation
+        return await self.renderer.apply(self.presenter.completed())
 
     async def start_assessment(self) -> Any:
         # TODO(M3)
